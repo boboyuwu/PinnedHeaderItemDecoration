@@ -6,7 +6,7 @@
 这样可能不满足一些特定的需求,比如吸顶的这种Type类型的View需要点击处理怎么办？
 基于这种情况,开发这个既不影响点击又可以自由设置吸顶Type的ItemDecoration.
 
-<br>![image](https://github.com/boboyuwu/PinnedHeaderItemDecoration/blob/master/pic/ScreenGif.gif)</br>
+<br>![image](https://github.com/boboyuwu/PinnedHeaderItemDecoration/blob/master/pic/ScreenGif1.gif)</br>
 
 <br>使用时只需要将你的Adapter实现AdapterStick接口即可,默认只需要实现这个方法isPinnedViewType()返回需要吸顶的Type
 即可实现吸顶效果,所以哪种Type类型需要吸顶效果相关逻辑处理完全交给使用者去决定，这样比较灵活，并且由于完全不干涉各种Type类型
