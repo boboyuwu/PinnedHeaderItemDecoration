@@ -11,9 +11,11 @@ import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pipikou.library.AdapterStick;
 import com.pipikou.library.PinnedHeaderItemDecoration;
@@ -102,13 +104,27 @@ public class ThreeHeaderPinnedActivity extends AppCompatActivity {
             if(getItemViewType(position)==SimpleBean.TYPE_HEADER+position){
               return;
             }
-            SimpleBean simpleBean = mList.get(position-headers.size());
+            final SimpleBean simpleBean = mList.get(position-headers.size());
             if(getItemViewType(position)==SimpleBean.TYPE_TITLE){
                 SimpleTitleHolder simpleTitleHolder= (SimpleTitleHolder) holder;
                 simpleTitleHolder.mTitle.setText(simpleBean.getTitle());
+                final int layoutPosition = holder.getLayoutPosition();
+                simpleTitleHolder.itemView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(mContext,"position:"+layoutPosition+" title:"+simpleBean.getTitle(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }else{
                 SimpleHolder simpleHolder= (SimpleHolder) holder;
                 simpleHolder.mText.setText(simpleBean.getText());
+                final int layoutPosition = holder.getLayoutPosition();
+                simpleHolder.itemView.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Toast.makeText(mContext,"position:"+layoutPosition+" normal:"+simpleBean.getText(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }
 
