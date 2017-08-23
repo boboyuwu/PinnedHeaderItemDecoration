@@ -5,3 +5,5 @@
 因为网上的吸顶效果基本都是基于ItemDecoration绘制的,也就是说基本都是只能看没法操作,只是达到了一个视图的效果。
 这样可能不满足一些特定的需求,比如吸顶的这种Type类型的View需要点击怎么办？
 基于此种情况,用另一种方式实现了可以点击的吸顶Type.
+
+![Image text](https://github.com/boboyuwu/PinnedHeaderItemDecoration/pic/ScreenGif.gif) <br/>
