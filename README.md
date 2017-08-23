@@ -6,7 +6,7 @@
 这样可能不满足一些特定的需求,比如吸顶的这种Type类型的View需要点击怎么办？
 基于此种情况,用另一种方式实现了可以点击的吸顶Type.
 
-<br>![image](https://github.com/boboyuwu/PinnedHeaderItemDecoration/blob/master/pic/ScreenGif.gif)</br>
+<br>![image](https://github.com/boboyuwu/PinnedHeaderItemDecoration/blob/master/pic/ScreenGif1.gif)</br>
 
 <br>使用时只需要将你的Adapter实现AdapterStick接口即可,只需要实现这个方法isPinnedViewType()返回需要吸顶的Type
 即可实现吸顶效果,所以哪种Type类型需要吸顶效果相关逻辑完全交给使用者去规定，比较灵活，并且由于完全不干涉各种Type类型
