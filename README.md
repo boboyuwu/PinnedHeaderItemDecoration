@@ -7,3 +7,8 @@
 基于此种情况,用另一种方式实现了可以点击的吸顶Type.
 
 <br>![image](https://github.com/boboyuwu/PinnedHeaderItemDecoration/blob/master/pic/ScreenGif.gif)</br>
+
+<br>使用时只需要将你的Adapter实现AdapterStick接口即可,只需要实现这个方法isPinnedViewType()返回需要吸顶的Type
+即可实现吸顶效果,所以哪种Type类型需要吸顶效果相关逻辑完全交给使用者去规定，比较灵活，并且由于完全不干各种Type类型
+布局填充等逻辑,一切还是按照原生Adapter操作，所以可以实现点击事件.如果存在多个Header情况下请额外实现getHeaderCount()
+这个方法并返回添加的HeaderView总长度</br>
