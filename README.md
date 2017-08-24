@@ -60,13 +60,13 @@
 		repositories {
 			...
 			maven { url 'https://jitpack.io' }
-		}
-	}
+		   }
+	    }
  ```
 
  <br>2:dependency</br>
  ```
  	dependencies {
 	        compile 'com.github.boboyuwu:PinnedHeaderItemDecoration:V1.0.0'
-	}
+	      }
  ```
