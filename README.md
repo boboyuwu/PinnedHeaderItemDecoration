@@ -14,7 +14,8 @@
 方法并返回添加的HeaderView总长度.</br>
 <br>
 ```
-    public class SimpleAdapter extends Adapter implements AdapterStick{
+  public class SimpleAdapter extends Adapter implements AdapterStick{
+    
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return null;
