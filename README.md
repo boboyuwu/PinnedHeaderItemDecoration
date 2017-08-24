@@ -6,6 +6,8 @@
 这样可能不满足一些特定的需求,比如吸顶的这种Type类型的View需要点击处理怎么办？
 基于这种情况,开发了既不影响点击又可以自由设置吸顶Type的ItemDecoration.
 
+PinnedHeaderItemDecoration支持LinearLayoutManager和GridLayoutManager,,目前只支持不带Header以及带Header吸顶效果
+
 <br>![image](https://github.com/boboyuwu/PinnedHeaderItemDecoration/blob/master/pic/ScreenGif2.gif)</br>
 
 <br>使用时只需要将你的Adapter实现AdapterStick接口即可,默认只需要实现这个方法isPinnedViewType()返回需要吸顶的Type
@@ -47,7 +49,7 @@
 ```
 </br>
 
-而在Activity里面这样调用即可,非常简单,目前只支持不带Header以及带Header吸顶效果
+而在Activity里面这样调用即可,非常简单~
 ```
   SimpleAdapter simpleAdapter = new SimpleAdapter(this,list);
   recyclerView.addItemDecoration(new PinnedHeaderItemDecoration.Builder().adapterProvider(simpleAdapter).build());
