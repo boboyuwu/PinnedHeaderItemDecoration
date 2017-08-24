@@ -93,7 +93,7 @@ public class NoHeaderPinnedActivity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
-            Log.e("ThreeHeaderPinnedActivity","position:"+position+":"+getItemViewType(position));
+            Log.e("NoHeaderPinnedGridActivity","position:"+position+":"+getItemViewType(position));
             if(getItemViewType(position)==SimpleBean.TYPE_HEADER){
                 return;
             }

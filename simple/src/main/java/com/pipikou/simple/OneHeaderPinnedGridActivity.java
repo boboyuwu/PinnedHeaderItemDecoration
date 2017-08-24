@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -21,7 +22,7 @@ import com.pipikou.library.PinnedHeaderItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OneHeaderPinnedActivity extends AppCompatActivity {
+public class OneHeaderPinnedGridActivity extends AppCompatActivity {
 
     private int titleCount;
     private RecyclerView mRecyclerView;
@@ -46,13 +47,14 @@ public class OneHeaderPinnedActivity extends AppCompatActivity {
         }
         SimpleAdapter simpleAdapter = new SimpleAdapter(this,list);
         mRecyclerView.addItemDecoration(new PinnedHeaderItemDecoration.Builder().adapterProvider(simpleAdapter).build());
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setAdapter(simpleAdapter);
 
     }
 
     public static void GoToOneHeaderActivity(Context context){
-        Intent intent = new Intent(context, OneHeaderPinnedActivity.class);
+        Intent intent = new Intent(context, OneHeaderPinnedGridActivity.class);
         context.startActivity(intent);
     }
 
@@ -65,11 +67,33 @@ public class OneHeaderPinnedActivity extends AppCompatActivity {
         public SimpleAdapter(Context context,List <SimpleBean>list){
             mContext = context;
             mList = list;
-            ViewGroup content = (ViewGroup) ((OneHeaderPinnedActivity) mContext).findViewById(android.R.id.content);
+            ViewGroup content = (ViewGroup) ((OneHeaderPinnedGridActivity) mContext).findViewById(android.R.id.content);
             View inflate = LayoutInflater.from(mContext).inflate(R.layout.head_layout, content, false);
             headers.put((SimpleBean.TYPE_HEADER+(count++)),inflate);
         }
-
+        @Override
+        public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+            super.onAttachedToRecyclerView(recyclerView);
+            LayoutManager layoutManager = recyclerView.getLayoutManager();
+            if (layoutManager instanceof GridLayoutManager) {
+                final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+                final GridLayoutManager.SpanSizeLookup spanSizeLookup = gridLayoutManager
+                        .getSpanSizeLookup();
+                gridLayoutManager
+                        .setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                            @Override
+                            public int getSpanSize(int position) {
+                                int viewType = getItemViewType(position);
+                                if (viewType == SimpleBean.TYPE_TITLE||viewType == SimpleBean.TYPE_HEADER) {
+                                    return gridLayoutManager.getSpanCount();
+                                } else {
+                                    return 1;
+                                }
+                            }
+                        });
+                gridLayoutManager.setSpanCount(gridLayoutManager.getSpanCount());
+            }
+        }
         @Override
         public int getItemViewType(int position) {
             if(position<headers.size()){

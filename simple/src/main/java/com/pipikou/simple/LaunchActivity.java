@@ -18,7 +18,7 @@ public class LaunchActivity extends AppCompatActivity {
     }
 
     public void toThreeHead(View view){
-        ThreeHeaderPinnedActivity.GoToThreeHeaderActivity(this);
+        NoHeaderPinnedGridActivity.GoToThreeHeaderActivity(this);
     }
 
     public void toTwoHead(View view){
@@ -27,7 +27,7 @@ public class LaunchActivity extends AppCompatActivity {
 
 
     public void toOneHead(View view){
-        OneHeaderPinnedActivity.GoToOneHeaderActivity(this);
+        OneHeaderPinnedGridActivity.GoToOneHeaderActivity(this);
     }
 
     public void toNoHead(View view){

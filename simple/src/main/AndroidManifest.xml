@@ -16,10 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ThreeHeaderPinnedActivity"></activity>
+        <activity android:name=".NoHeaderPinnedGridActivity"></activity>
         <activity android:name=".NoHeaderPinnedActivity"></activity>
         <activity android:name=".TwoHeaderPinnedActivity"></activity>
-        <activity android:name=".OneHeaderPinnedActivity"></activity>
+        <activity android:name=".OneHeaderPinnedGridActivity"></activity>
     </application>
 
 </manifest>

@@ -3,6 +3,7 @@ package com.pipikou.library;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.Region;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -108,9 +109,17 @@ public class PinnedHeaderItemDecoration extends RecyclerView.ItemDecoration {
         checkCache(parent);
 
         // get LinearLayoutManager.
-        final LinearLayoutManager linearLayoutManager = getLayoutManager(parent);
-        if (linearLayoutManager == null) return;
-        mFirstVisiblePosition = linearLayoutManager.findFirstVisibleItemPosition();
+        //final LinearLayoutManager linearLayoutManager = getLayoutManager(parent);
+        final RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
+        if (layoutManager instanceof LinearLayoutManager) {
+            mFirstVisiblePosition=((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+        } else if(layoutManager instanceof GridLayoutManager){
+            mFirstVisiblePosition=((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
+        }else{
+            return;
+        }
+
+       // mFirstVisiblePosition = gridLayoutManager.findFirstVisibleItemPosition();
 
         final int headerPosition = findPinnedHeaderPosition(mFirstVisiblePosition);
 
@@ -156,17 +165,6 @@ public class PinnedHeaderItemDecoration extends RecyclerView.ItemDecoration {
         }
     }
 
-    /**目前只支持LinearLayoutManger类型*/
-    private LinearLayoutManager getLayoutManager(RecyclerView parent) {
-        final LinearLayoutManager linearLayoutManager;
-        final RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
-        if (layoutManager instanceof LinearLayoutManager) {
-            linearLayoutManager = (LinearLayoutManager) layoutManager;
-        } else {
-            return null;
-        }
-        return linearLayoutManager;
-    }
 
     /**
      * return the first visible view position is headerview

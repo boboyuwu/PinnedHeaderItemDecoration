@@ -4,11 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.RecyclerView.ViewHolder;
-import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -23,7 +23,7 @@ import com.pipikou.library.PinnedHeaderItemDecoration;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ThreeHeaderPinnedActivity extends AppCompatActivity {
+public class NoHeaderPinnedGridActivity extends AppCompatActivity {
 
     private int titleCount;
     private RecyclerView mRecyclerView;
@@ -48,13 +48,13 @@ public class ThreeHeaderPinnedActivity extends AppCompatActivity {
         }
         SimpleAdapter simpleAdapter = new SimpleAdapter(this,list);
         mRecyclerView.addItemDecoration(new PinnedHeaderItemDecoration.Builder().adapterProvider(simpleAdapter).build());
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new GridLayoutManager(this,4));
         mRecyclerView.setAdapter(simpleAdapter);
 
     }
 
     public static void GoToThreeHeaderActivity(Context context){
-        Intent intent = new Intent(context, ThreeHeaderPinnedActivity.class);
+        Intent intent = new Intent(context, NoHeaderPinnedGridActivity.class);
         context.startActivity(intent);
     }
 
@@ -63,25 +63,46 @@ public class ThreeHeaderPinnedActivity extends AppCompatActivity {
         private List<SimpleBean> mList;
 
         private int count;
-        private SparseArray<View> headers=new SparseArray<>();
+       // private SparseArray<View> headers=new SparseArray<>();
         public SimpleAdapter(Context context,List <SimpleBean>list){
             mContext = context;
             mList = list;
-            ViewGroup content = (ViewGroup) ((ThreeHeaderPinnedActivity) mContext).findViewById(android.R.id.content);
+           /* ViewGroup content = (ViewGroup) ((NoHeaderPinnedGridActivity) mContext).findViewById(android.R.id.content);
             View inflate = LayoutInflater.from(mContext).inflate(R.layout.head_layout, content, false);
             View inflate1 = LayoutInflater.from(mContext).inflate(R.layout.head_layout, content, false);
             View inflate2 = LayoutInflater.from(mContext).inflate(R.layout.head_layout, content, false);
             headers.put((SimpleBean.TYPE_HEADER+(count++)),inflate);
             headers.put((SimpleBean.TYPE_HEADER+(count++)),inflate1);
-            headers.put((SimpleBean.TYPE_HEADER+(count++)),inflate2);
+            headers.put((SimpleBean.TYPE_HEADER+(count++)),inflate2);*/
+        }
+
+        @Override
+        public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+            super.onAttachedToRecyclerView(recyclerView);
+            LayoutManager layoutManager = recyclerView.getLayoutManager();
+            if (layoutManager instanceof GridLayoutManager) {
+                final GridLayoutManager gridLayoutManager = (GridLayoutManager) layoutManager;
+                final GridLayoutManager.SpanSizeLookup spanSizeLookup = gridLayoutManager
+                        .getSpanSizeLookup();
+                gridLayoutManager
+                        .setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                            @Override
+                            public int getSpanSize(int position) {
+                                int viewType = getItemViewType(position);
+                                if (viewType == SimpleBean.TYPE_TITLE||viewType == SimpleBean.TYPE_HEADER) {
+                                    return gridLayoutManager.getSpanCount();
+                                } else {
+                                    return 1;
+                                }
+                            }
+                        });
+                gridLayoutManager.setSpanCount(gridLayoutManager.getSpanCount());
+            }
         }
 
         @Override
         public int getItemViewType(int position) {
-            if(position<headers.size()){
-                return SimpleBean.TYPE_HEADER+position;
-            }
-            int realPosition=position-headers.size();
+            int realPosition=position;
             SimpleBean simpleBean = mList.get(realPosition);
             return simpleBean.getType();
         }
@@ -91,10 +112,8 @@ public class ThreeHeaderPinnedActivity extends AppCompatActivity {
             ViewHolder viewHolder;
             if(viewType==SimpleBean.TYPE_TITLE){
                 viewHolder=new SimpleTitleHolder(LayoutInflater.from(mContext).inflate(R.layout.title_item_layout,parent,false));
-            }else if(viewType==SimpleBean.TYPE_NROMAL){
+            }else {
                 viewHolder=new SimpleHolder(LayoutInflater.from(mContext).inflate(R.layout.normal_item_layout,parent,false));
-            }else{
-                viewHolder=new SimpleHeaderHolder(headers.get(viewType));
             }
             return viewHolder;
         }
@@ -104,7 +123,7 @@ public class ThreeHeaderPinnedActivity extends AppCompatActivity {
             if(getItemViewType(position)==SimpleBean.TYPE_HEADER+position){
               return;
             }
-            final SimpleBean simpleBean = mList.get(position-headers.size());
+            final SimpleBean simpleBean = mList.get(position);
             if(getItemViewType(position)==SimpleBean.TYPE_TITLE){
                 SimpleTitleHolder simpleTitleHolder= (SimpleTitleHolder) holder;
                 simpleTitleHolder.mTitle.setText(simpleBean.getTitle());
@@ -130,12 +149,12 @@ public class ThreeHeaderPinnedActivity extends AppCompatActivity {
 
         @Override
         public int getItemCount() {
-            return mList.size()+headers.size();
+            return mList.size();
         }
 
         @Override
         public int getHeaderCount() {
-            return headers.size();
+            return 0;
         }
 
         @Override
