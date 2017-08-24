@@ -4,7 +4,7 @@
 现在网上有很多类似这种效果的轮子，那么为什么还要重复造这个轮子呢？
 因为网上的吸顶效果基本都是基于ItemDecoration绘制的,也就是说只能看没法操作,只是达到了一个视图的效果。
 这样可能不满足一些特定的需求,比如吸顶的这种Type类型的View需要点击处理怎么办？
-基于这种情况,开发这个既不影响点击又可以自由设置吸顶Type的ItemDecoration.
+基于这种情况,开发了既不影响点击又可以自由设置吸顶Type的ItemDecoration.
 
 <br>![image](https://github.com/boboyuwu/PinnedHeaderItemDecoration/blob/master/pic/ScreenGif1.gif)</br>
 
@@ -47,7 +47,7 @@
 ```
 </br>
 
-而在Activity里面这样调用即可
+而在Activity里面这样调用即可,非常简单,目前只支持不带Header以及带Header吸顶效果
 ```
   SimpleAdapter simpleAdapter = new SimpleAdapter(this,list);
   recyclerView.addItemDecoration(new PinnedHeaderItemDecoration.Builder().adapterProvider(simpleAdapter).build());
