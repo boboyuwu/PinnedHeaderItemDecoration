@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 *.iml
 .gradle
 /local.properties
@@ -25,7 +24,6 @@ gen/
 out/
 
 # Gradle files
-.gradle/
 build/
 
 # Local configuration file (sdk path, etc)
@@ -44,7 +42,6 @@ proguard/
 captures/
 
 # Intellij
-*.iml
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/gradle.xml
@@ -64,4 +61,3 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
->>>>>>> 9c719593be0f2d999c63585093a4859111e44d2c
