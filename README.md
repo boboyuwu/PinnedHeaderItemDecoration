@@ -69,6 +69,6 @@ PinnedHeaderItemDecoration支持LinearLayoutManager和GridLayoutManager,目前�
  <br>2:dependency</br>
  ```
  	dependencies {
-	        compile 'com.github.boboyuwu:PinnedHeaderItemDecoration:V1.0.0'
+	         compile 'com.github.boboyuwu:PinnedHeaderItemDecoration:V1.0.0'
 	      }
  ```
