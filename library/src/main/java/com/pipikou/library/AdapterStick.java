@@ -7,11 +7,11 @@ import android.view.ViewGroup;
  * Created by wubo on 2017/8/22.
  */
 
-public interface AdapterStick extends Stick{
-    void onBindViewHolder(ViewHolder holder, int position);
+public interface AdapterStick<T extends ViewHolder> extends Stick{
+    void onBindViewHolder(T holder, int position);
     ViewHolder createViewHolder(ViewGroup parent, int viewType);
     int getItemViewType(int position);
     int getItemCount();
-    void bindViewHolder(ViewHolder holder, int position);
+    void bindViewHolder(T holder, int position);
     int getHeaderCount();
 }
