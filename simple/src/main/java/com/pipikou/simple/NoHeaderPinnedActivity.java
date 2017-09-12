@@ -48,7 +48,7 @@ public class NoHeaderPinnedActivity extends AppCompatActivity {
             list.add(simpleBean);
         }
         SimpleAdapter simpleAdapter = new SimpleAdapter(this,list);
-        recyclerView.addItemDecoration(new PinnedHeaderItemDecoration.Builder().adapterProvider(simpleAdapter).build());
+        recyclerView.addItemDecoration(PinnedHeaderItemDecoration.builder().adapterProvider(simpleAdapter).build());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(simpleAdapter);
     }

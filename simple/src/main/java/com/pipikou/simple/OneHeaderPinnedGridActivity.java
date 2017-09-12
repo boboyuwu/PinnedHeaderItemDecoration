@@ -46,7 +46,7 @@ public class OneHeaderPinnedGridActivity extends AppCompatActivity {
             list.add(simpleBean);
         }
         SimpleAdapter simpleAdapter = new SimpleAdapter(this,list);
-        mRecyclerView.addItemDecoration(new PinnedHeaderItemDecoration.Builder().adapterProvider(simpleAdapter).build());
+        mRecyclerView.addItemDecoration(PinnedHeaderItemDecoration.builder().adapterProvider(simpleAdapter).build());
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setAdapter(simpleAdapter);

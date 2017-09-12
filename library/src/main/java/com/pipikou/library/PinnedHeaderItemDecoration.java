@@ -14,10 +14,11 @@ import java.util.Map;
 
 /**
  * ItemDecoration for Stick Header.
+ * <p>
+ * 使用时只需要将你的Adapter实现AdapterStick接口即可
+ * 也就是主要实现这个方法isPinnedViewType()返回需要固定的Type
+ * 如果存在多个Header情况请实现getHeaderCount()这个方法并返回Header数量总长度
  *
- *  使用时只需要将你的Adapter实现AdapterStick接口即可
- *  也就是主要实现这个方法isPinnedViewType()返回需要固定的Type
- *  如果存在多个Header情况请实现getHeaderCount()这个方法并返回Header数量总长度
  * @author wubo
  */
 public class PinnedHeaderItemDecoration extends RecyclerView.ItemDecoration {
@@ -76,7 +77,7 @@ public class PinnedHeaderItemDecoration extends RecyclerView.ItemDecoration {
                 mPinnedHeaderTop = 0;
             }
 
-            if(isHeaderView(mFirstVisiblePosition)){
+            if (isHeaderView(mFirstVisiblePosition)) {
                 return;
             }
             mClipBounds = c.getClipBounds();
@@ -112,18 +113,18 @@ public class PinnedHeaderItemDecoration extends RecyclerView.ItemDecoration {
         //final LinearLayoutManager linearLayoutManager = getLayoutManager(parent);
         final RecyclerView.LayoutManager layoutManager = parent.getLayoutManager();
         if (layoutManager instanceof LinearLayoutManager) {
-            mFirstVisiblePosition=((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
-        } else if(layoutManager instanceof GridLayoutManager){
-            mFirstVisiblePosition=((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
-        }else{
+            mFirstVisiblePosition = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
+        } else if (layoutManager instanceof GridLayoutManager) {
+            mFirstVisiblePosition = ((GridLayoutManager) layoutManager).findFirstVisibleItemPosition();
+        } else {
             return;
         }
 
-       // mFirstVisiblePosition = gridLayoutManager.findFirstVisibleItemPosition();
+        // mFirstVisiblePosition = gridLayoutManager.findFirstVisibleItemPosition();
 
         final int headerPosition = findPinnedHeaderPosition(mFirstVisiblePosition);
 
-        if(isHeaderView(mFirstVisiblePosition)){
+        if (isHeaderView(mFirstVisiblePosition)) {
             return;
         }
 
@@ -168,6 +169,7 @@ public class PinnedHeaderItemDecoration extends RecyclerView.ItemDecoration {
 
     /**
      * return the first visible view position is headerview
+     *
      * @param firstVisiblePosition first visible view position
      */
     private boolean isHeaderView(int firstVisiblePosition) {
@@ -219,22 +221,22 @@ public class PinnedHeaderItemDecoration extends RecyclerView.ItemDecoration {
     }
 
 
-
-
     private void disableCache() {
         mPinnedHeaderView = null;
         mHeaderPosition = -1;
         mPinnedViewTypes.clear();
     }
 
+    public static Builder builder() {
+        return new Builder();
+    }
+
+
     public static class Builder {
 
         private AdapterStick mStickProvider;
         private PinnedHeaderItemDecoration mPinnedHeaderItemDecoration;
 
-        public Builder Builder() {
-            return new Builder();
-        }
 
         public Builder adapterProvider(AdapterStick stickProvider) {
             mStickProvider = stickProvider;
