@@ -52,7 +52,7 @@ PinnedHeaderItemDecoration支持LinearLayoutManager和GridLayoutManager,目前�
 而在Activity里面这样调用即可,非常简单~
 ```
   SimpleAdapter simpleAdapter = new SimpleAdapter(this,list);
-  recyclerView.addItemDecoration(new PinnedHeaderItemDecoration.Builder().adapterProvider(simpleAdapter).build());
+  recyclerView.addItemDecoration(PinnedHeaderItemDecoration.builder().adapterProvider(simpleAdapter).build());
 ```
 
 <br>依赖方式</br>
