@@ -6,7 +6,7 @@
 <br>1:网上的吸顶效果基本都是基于ItemDecoration绘制的,也就是说只能看没法操作,只是达到了一个视图的效果。
 这样可能不满足一些特定的需求,比如吸顶的这种Type类型的View需要点击处理怎么办？</br>
 <br>2:这种基于ItemDecoration绘制使用起来会有很大的不便,我们需要在源码中去更改样式并且必须实现它提供的一大堆方法,非常烦恼</br>
-<br>基于以上情况,所以我开发了这款简单操作又完美解决上述问题自由设置吸顶Type的ItemDecoration.</br>
+<br>基于以上情况,所以我开发了这款既简单操作又完美解决上述问题自由设置吸顶Type的PinnedHeaderItemDecoration.</br>
 
 PinnedHeaderItemDecoration支持LinearLayoutManager和GridLayoutManager,目前只支持不带Header以及带Header吸顶效果,
 后续会支持分割线。
