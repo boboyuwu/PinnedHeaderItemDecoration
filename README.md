@@ -45,9 +45,8 @@ PinnedHeaderItemDecoration支持LinearLayoutManager和GridLayoutManager,目前�
 
     @Override
     public boolean isPinnedViewType(int viewType) {
-        //DO..... 需要吸顶viewType相关逻辑
-        
-        return false;
+        //DO..... 需要吸顶viewType相关逻辑,返回true表示需要吸顶
+        return false;
     }
 }
 ```
